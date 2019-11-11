@@ -3,8 +3,8 @@ package com.mygdx.game.resources;
 import com.badlogic.gdx.Gdx;
 
 public class RDim {
-    public static int FLUFFY_WIDTH = 64;
-    public static int FLUFFY_HEIGHT = 64;
+    public static int FLUFFY_WIDTH = 64*2;
+    public static int FLUFFY_HEIGHT = 64*2;
     public static float DEVICE_WIDTH = Gdx.graphics.getWidth();
     public static float DEVICE_HEIGHT = Gdx.graphics.getHeight();
     public static float mm_bg_width = DEVICE_WIDTH;

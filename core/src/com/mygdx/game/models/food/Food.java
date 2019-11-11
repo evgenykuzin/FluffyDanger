@@ -3,9 +3,9 @@ package com.mygdx.game.models.food;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.resources.RDim;
 import com.mygdx.game.resources.RTextures;
 
 import java.util.Random;
@@ -16,6 +16,7 @@ public class Food extends Sprite {
     int width;
     int height;
     float speed;
+    private boolean canFall;
     public enum TYPE{
         APPLE,
         WATERMELLON,
@@ -33,9 +34,10 @@ public class Food extends Sprite {
     }
 
     public void initialize(){
-        speed = 0.5f;
+        speed = 2f;
         width = 32;
         height = 32;
+        canFall = true;
         Random random = new Random();
         while (foodType == null) {
             for (Enum<TYPE> type : TYPE.values()) {
@@ -61,8 +63,14 @@ public class Food extends Sprite {
     }
 
     public void fall(){
-        speed += 0.005f;
-        position.y -= speed;
+        if (canFall) {
+            speed += 0.01f;
+            position.y -= speed;
+        }
+    }
+
+    public void stop(){
+        canFall = false;
     }
 
     public Texture getTexture(){
@@ -92,5 +100,17 @@ public class Food extends Sprite {
         return result;
     }
 
+
+    public void moveRight(float towerSpeed){
+        if (position.x < RDim.DEVICE_WIDTH-width) {
+            position.x += towerSpeed;
+        }
+    }
+
+    public void moveLeft(float towerSpeed){
+        if (position.x > 0) {
+            position.x -= towerSpeed;
+        }
+    }
 
 }

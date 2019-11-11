@@ -18,13 +18,19 @@ public class BlockManager {
     private Fluffy fluffy;
     private Hud hud;
     private ArrayList<Food> deadList;
-
+    private ArrayList<Food> towerList;
+    private Food topBlock;
+    private float towerSpeed;
     public BlockManager(GameScreen gs) {
         this.gs = gs;
         blockList = new ArrayList<Food>();
         deadList = new ArrayList<Food>();
+        towerList = new ArrayList<Food>();
+        towerSpeed = 10;
         fluffy = gs.getFluffy();
         hud = gs.getHud();
+        topBlock = new Food(new Vector2(300,70));
+        towerList.add(topBlock);
     }
 
     public void drawBlocks(SpriteBatch batch) {
@@ -33,6 +39,10 @@ public class BlockManager {
                 food.drawFood(batch);
             }
         }
+        for (Food food : towerList){
+            food.drawFood(batch);
+        }
+        //topBlock.drawFood(batch);
     }
 
     public void allFalls() {
@@ -40,7 +50,7 @@ public class BlockManager {
         if (!blockList.isEmpty()) {
             for (Food food : blockList) {
                 food.fall();
-                if (food.position.y > RDim.DEVICE_HEIGHT) {
+                if (food.position.y <= 0) {
                     deadList.add(food);
                 }
             }
@@ -52,37 +62,46 @@ public class BlockManager {
     public void initBlocks() {
         Random random = new Random();
         float rx = random.nextInt(600);
-        Food food = new Food(new Vector2(rx, RDim.DEVICE_HEIGHT));
+        Food food = new Food(new Vector2(rx,RDim.DEVICE_HEIGHT + topBlock.position.y));
         blockList.add(food);
     }
 
     public void overlaps() {
-        Food eated = null;
+        Food added = null;
         for (Food food : blockList) {
             if (!deadList.contains(food)) {
-                if (food.position.x >= fluffy.getPosition().x
-                        && food.position.y >= fluffy.getPosition().y
-                        && food.position.x <= fluffy.getPosition().x + fluffy.getWidth()
-                        && food.position.y <= fluffy.getPosition().y + fluffy.getHeight()
+                if (food.position.x >= topBlock.position.x
+                        && food.position.y >= topBlock.position.y
+                        && food.position.x <= topBlock.position.x + topBlock.getWidth()
+                        && food.position.y <= topBlock.position.y + topBlock.getHeight()
                 ) {
-                    eated = food;
-                    Jeludok jeludok = gs.getHud().getJeludok();
-                    MindCloud mindCloud = gs.getMindCloud();
-                    int indx = 0;
-                    if (!jeludok.getFoods().isEmpty()) {
-                        indx = jeludok.getFoods().size();
-                    }
-                    if (!mindCloud.getFoods().get(jeludok.getFoods().size()).foodType.equals(eated.foodType)) {
-                        hud.missHealth(1);
-                        jeludok.clear();
-                        mindCloud.generate();
-                    } else {
-                        jeludok.add(food);
-                    }
+                   food.stop();
+                   towerList.add(food);
+                   topBlock = food;
+                    added = food;
+                    gs.getCamera().position.y = topBlock.position.y;
 
                     break;
                 }
             }
         }
+        blockList.remove(added);
     }
+
+
+
+    public void moveLeft(){
+        for (Food food : towerList){
+            food.moveLeft(towerSpeed);
+        }
+        //topBlock.moveLeft();
+    }
+
+    public void moveRight(){
+        for (Food food : towerList){
+            food.moveRight(towerSpeed);
+        }
+       // topBlock.moveRight();
+    }
+
 }

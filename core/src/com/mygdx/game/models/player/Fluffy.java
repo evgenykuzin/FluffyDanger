@@ -1,5 +1,6 @@
 package com.mygdx.game.models.player;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -7,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.resources.Prefs;
 import com.mygdx.game.resources.RDim;
 import com.mygdx.game.resources.RTextures;
+
+import java.util.Random;
 
 public class Fluffy extends Sprite {
     private TextureRegion textureRegion;
@@ -25,6 +28,16 @@ public class Fluffy extends Sprite {
         speed = 10.0f;
         setBounds(position.x, position.y, width, height);
         setTexture(textureRegion.getTexture());
+    }
+
+
+    public void changeTexture(boolean b){
+            if (b) {
+                textureRegion = new TextureRegion(RTextures.openmouthplayer);
+            } else {
+                //System.out.println("change 2");
+                textureRegion = new TextureRegion(RTextures.closemouthplayer);
+            }
     }
 
     public Vector2 getPosition(){

@@ -18,7 +18,7 @@ android {
     }
     defaultConfig {
         applicationId "com.mygdx.game"
-        minSdkVersion 9
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -105,8 +105,8 @@ eclipse {
     }
 
     classpath {
-        plusConfigurations += [ project.configurations.compile ]        
-        containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK', 'com.android.ide.eclipse.adt.LIBRARIES'       
+        plusConfigurations += [ project.configurations.compile ]
+        containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK', 'com.android.ide.eclipse.adt.LIBRARIES'
     }
 
     project {
@@ -124,7 +124,7 @@ eclipse {
 idea {
     module {
         sourceDirs += file("src");
-        scopes = [ COMPILE: [plus:[project.configurations.compile]]]        
+        scopes = [ COMPILE: [plus:[project.configurations.compile]]]
 
         iml {
             withXml {

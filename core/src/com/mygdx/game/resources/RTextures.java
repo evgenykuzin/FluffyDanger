@@ -3,7 +3,7 @@ package com.mygdx.game.resources;
 import com.badlogic.gdx.graphics.Texture;
 
 public class RTextures {
-    public static final Texture fluffyOne = new Texture("textures\\fluffyone.png");
+    public static final Texture fluffyOne = new Texture("textures\\doge.png");
     public static final Texture fluffyTwo = new Texture("textures\\fluffytwo.png");
     public static final Texture fluffyThree = new Texture("textures\\fluffythree.png");
     public static final Texture fluffyFour = new Texture("textures\\fluffyfour.png");
@@ -17,7 +17,6 @@ public class RTextures {
     public static final Texture mm_start_btn = new Texture("textures\\mm_start_btn.png");
     public static final Texture mm_store_btn = new Texture("textures\\mm_store_btn.png");
     public static final Texture mm_settings_btn = new Texture("textures\\mm_settings_btn.png");
-    public static final Texture dick = new Texture("textures\\dick.png");
     public static final Texture hud_pause_btn = new Texture("textures\\pause.png");
     public static final Texture hud_pause_view = new Texture("textures\\pause_view.png");
     public static final Texture hud_quit = new Texture("textures\\quit.png");
@@ -27,6 +26,8 @@ public class RTextures {
     public static final Texture buy_btn = new Texture("textures\\buybtn.png");
     public static final Texture select_btn = new Texture("textures\\selectbtn.png");
     public static final Texture selected = new Texture("textures\\selected.png");
+    public static final Texture openmouthplayer = new Texture("textures\\pacmanopen.png");
+    public static final Texture closemouthplayer = new Texture("textures\\pacmanclose.png");
 
 
 }

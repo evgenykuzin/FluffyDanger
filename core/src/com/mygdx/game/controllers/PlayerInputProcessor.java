@@ -3,6 +3,7 @@ package com.mygdx.game.controllers;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.models.food.BlockManager;
 import com.mygdx.game.models.player.Fluffy;
 import com.mygdx.game.models.hud.Hud;
 import com.mygdx.game.screens.GameScreen;
@@ -16,11 +17,15 @@ public class PlayerInputProcessor implements InputProcessor {
     boolean quitTouched;
     MyGame game;
     Hud hud;
+    BlockManager blockManager;
+    private GameScreen gs;
     public PlayerInputProcessor(MyGame game, GameScreen gs, Fluffy fluffy){
         this.game = game;
+        this.gs = gs;
         hud = gs.getHud();
         lastTouch = new Vector2();
         this.fluffy = fluffy;
+        blockManager = gs.getBlockManager();
         pauseTouched = false;
         pauseViewShown = false;
         quitTouched = false;
@@ -67,7 +72,7 @@ public class PlayerInputProcessor implements InputProcessor {
                 pauseViewShown = false;
                 hud.setPauseViewShown(false);
             }
-        } else if (quitTouched) {
+        } else if (quitTouched && pauseViewShown) {
             quitTouched = false;
             game.setScreen(new MainMenuScreen(game));
         } else {
